@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DDD.Applications\DDD.Application.csproj" />
+    <ProjectReference Include="..\DDD.Infrastructure\DDD.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
