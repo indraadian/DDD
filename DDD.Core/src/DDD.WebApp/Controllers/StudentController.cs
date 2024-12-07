@@ -1,5 +1,5 @@
-﻿using DDD.Applications.DTOs;
-using DDD.Applications.Interfaces;
+﻿using DDD.Application;
+using DDD.Application.Students;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DDD.WebApp.Controllers
@@ -16,14 +16,14 @@ namespace DDD.WebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllStudents()
         {
-            var students = await _studentService.GetAllStudentsAsync();
+            var students = await _studentService.GetAllAsync();
             return Ok(students);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStudentById(Guid id)
         {
-            var student = await _studentService.GetStudentByIdAsync(id);
+            var student = await _studentService.GetByIdAsync(id);
             if (student == null) return NotFound();
             return Ok(student);
         }
@@ -31,7 +31,7 @@ namespace DDD.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AddStudent([FromBody] StudentDto studentDto)
         {
-            await _studentService.AddStudentAsync(studentDto);
+            await _studentService.AddAsync(studentDto);
             return CreatedAtAction(nameof(GetStudentById), new { id = studentDto.Id }, studentDto);
         }
 
@@ -39,14 +39,14 @@ namespace DDD.WebApp.Controllers
         public async Task<IActionResult> UpdateStudent(Guid id, [FromBody] StudentDto studentDto)
         {
             if (id != studentDto.Id) return BadRequest();
-            await _studentService.UpdateStudentAsync(studentDto);
+            await _studentService.UpdateAsync(studentDto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(Guid id)
         {
-            await _studentService.DeleteStudentAsync(id);
+            await _studentService.DeleteAsync(id);
             return NoContent();
         }
     }

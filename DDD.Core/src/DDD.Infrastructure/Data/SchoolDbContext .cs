@@ -1,4 +1,4 @@
-﻿using DDD.Domain.Entities;
+﻿using DDD.Domain.Students;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -1,8 +1,12 @@
+using DDD.Domain;
 using DDD.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddInfrastructureDependency(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
+//builder.Services.AddDomain();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

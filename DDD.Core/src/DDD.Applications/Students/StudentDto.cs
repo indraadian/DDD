@@ -1,6 +1,8 @@
-﻿namespace DDD.Applications.DTOs;
+﻿using DDD.Application;
 
-public class StudentDto
+namespace DDD.Application.Students;
+
+public class StudentDto : ApplicationDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;

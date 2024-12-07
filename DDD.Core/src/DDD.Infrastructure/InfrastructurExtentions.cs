@@ -1,16 +1,16 @@
-﻿using DDD.Domain.Entities;
-using DDD.Domain.Interfaces;
+﻿using DDD.Domain;
+using DDD.Domain.Students;
 using DDD.Infrastructure.Data;
-using DDD.Infrastructure.Repositories;
+using DDD.Infrastructure.Students;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DDD.Infrastructure;
 
-public static class DependencyInjections
+public static class InfrastructurExtentions
 {
-    public static IServiceCollection AddInfrastructureDependency(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         // Daftarkan DbContext
         services.AddDbContext<SchoolDbContext>(options =>
@@ -18,7 +18,8 @@ public static class DependencyInjections
 
 
         // Daftarkan semua repository
-        services.AddScoped(typeof(IRepository<Student>), typeof(StudentRepository));
+        services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+        services.AddScoped<IStudentRepository, StudentRepository>();
 
         return services;
     }
