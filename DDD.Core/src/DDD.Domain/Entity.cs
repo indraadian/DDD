@@ -1,15 +1,37 @@
-﻿namespace DDD.Domain;
+﻿using Newtonsoft.Json;
+
+namespace DDD.Domain;
 
 public abstract class Entity
 {
-    public virtual Guid Id { get; protected set; }
-    public virtual bool IsDeleted { get; protected set; }
-    public virtual DateTime CreatedDate { get; protected set; }
-    public virtual DateTime UpdatedDate { get; protected set; }
-    public virtual DateTime? DeletedDate { get; protected set; }
-    public virtual string CreatedBy { get; protected set; }
-    public virtual string UpdatedBy { get; protected set; }
-    public virtual string DeletedBy { get; protected set; }
+    public Guid Id { get; protected set; }
+    public bool IsDeleted { get; protected set; }
+    public DateTime CreatedDate { get; protected set; }
+    public DateTime UpdatedDate { get; protected set; }
+    public DateTime? DeletedDate { get; protected set; }
+    public string CreatedBy { get; protected set; } = string.Empty;
+    public string UpdatedBy { get; protected set; } = string.Empty;
+    public string DeletedBy { get; protected set; } = string.Empty;
+    public string Properties { get; protected set; } = string.Empty;
+    public virtual PropertiesModel PropertiesModel
+    {
+        get
+        {
+            var propertiesModel = new PropertiesModel();
+            if (!string.IsNullOrEmpty(this.Properties))
+            {
+                try
+                {
+                    propertiesModel = JsonConvert.DeserializeObject<PropertiesModel>(this.Properties);
+                }
+                catch (Exception)
+                {
+                    propertiesModel = new PropertiesModel();
+                }
+            }
+            return propertiesModel!;
+        }
+    }
 
     //TODO: set user
     public void SetCreated()
@@ -28,4 +50,17 @@ public abstract class Entity
         DeletedDate = DateTime.Now;
         SetDeleted();
     }
+
+    public void UpateProperties()
+    {
+        if (this.PropertiesModel != null)
+        {
+            this.Properties = JsonConvert.SerializeObject(this.PropertiesModel);
+        }
+    }
+}
+
+public class PropertiesModel
+{
+
 }
