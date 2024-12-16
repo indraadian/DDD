@@ -1,5 +1,4 @@
-﻿using DDD.Domain.Students;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace DDD.Domain
 {
