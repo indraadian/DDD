@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using DDD.Application.Students;
-using DDD.Domain.Students;
+using DDD.Application.Dtos;
+using DDD.Domain.Entities;
 
 namespace DDD.Application;
 

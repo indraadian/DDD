@@ -1,8 +1,10 @@
-﻿using DDD.Application;
-using DDD.Application.Students;
+﻿using DDD.Application.Interfaces;
+using DDD.Application.Interfaces.Base;
+using DDD.Application.Services;
+using DDD.Application.Services.Base;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DDD.Infrastructure;
+namespace DDD.Application;
 
 public static class ApplicationExtentions
 {
